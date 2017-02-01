@@ -1,0 +1,43 @@
+body {
+  background-color: 'black';
+  color: 'papayawhip';
+}
+
+h1 {
+  font-family: 'Codystar', cursive;
+}
+
+.form-container {
+  height: 75vh;
+  width: 75vm;
+  align-items: center;
+  justify-content: center;
+}
+.signin-container {
+  align-items: center;
+  justify-content: center;
+  padding-left: 250px;
+  padding-top: 250px;
+}
+label {
+  font-family: 'Droid Serif', serif;
+  margin-left: 100px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+
+}
+
+.question-inputs, .answer-inputs {
+  width: 10vh;
+  display: block;
+  margin-left: 100px;
+  margin-top: 5px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 2px #888888;
+}
+
+.submit-btn {
+  border-radius: 5px;
+  margin-left: 100px;
+  margin-top: 5px;
+}

@@ -1,0 +1,21 @@
+{
+  "name": "realtime",
+  "version": "1.0.0",
+  "description": "a polling application",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "author": "Chelsea Skovgaard and Nick Chambers",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.1",
+    "socket.io": "^1.7.2"
+  },
+  "devDependencies": {
+    "body-parser": "^1.16.0",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
+}
