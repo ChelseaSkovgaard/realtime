@@ -35,7 +35,6 @@ function renderResults(poll) {
   })
 }
 
-
 $('#choices').on('click', '.choice-buttons', function() {
   socket.send('voteCast', this.innerText);
 });
@@ -59,5 +58,17 @@ socket.on('votes', (votes) => {
     }
     return allVotes;
   }, {});
-console.log(voteCounts);
+  renderVotes(voteCounts);
 });
+
+function renderVotes(votes) {
+  let answers = Object.keys(votes)
+  $('#results').empty();
+
+  answers.forEach(function(count) {
+    $('#results').append(
+      `<p><span class=results>${answers} : </span><span class=count>${votes[count]}</span></p>`
+    );
+  });
+  console.log(answers);
+}
