@@ -62,12 +62,13 @@ socket.on('votes', (votes) => {
 });
 
 function renderVotes(votes) {
-  let answers = Object.keys(votes)
   $('#results').empty();
+  let answers = Object.keys(votes)
 
   answers.forEach(function(count) {
+    console.log(answers);
     $('#results').append(
-      `<p><span class=results>${answers} : </span><span class=count>${votes[count]}</span></p>`
+      `<p>${count} : <span class=count>${votes[count]}</span></p>`
     );
   });
   console.log(answers);
