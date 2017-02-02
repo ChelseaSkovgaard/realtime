@@ -1,3 +1,8 @@
+const socket = io();
+
+const connectionCount = document.getElementById('connection-count');
+const results = document.getElementById('results')
+
 $(document).ready(function() {
   $.ajax({
     type: 'GET',
@@ -18,4 +23,12 @@ function renderPoll(poll) {
       `<button type=radio>${answer}</button>`
     )
   })
-}
+};
+
+socket.on('usersConnected', (count) => {
+  connectionCount.innerText = 'Connected Users: ' + count;
+});
+
+socket.on('results', (message) => {
+  results.innerText = message;
+});

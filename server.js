@@ -1,3 +1,4 @@
+const http = require('http')
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -13,8 +14,16 @@ app.locals.title = 'Real Time';
 
 app.locals.polls = [];
 
-
 app.use(express.static(path.join(__dirname, '/public')))
+
+const port = process.env.PORT || 3000;
+const server = http.createServer(app)
+  .listen(port, () => {
+    console.log(`Listening on port ${port}.`)
+  })
+
+const socketIo = require('socket.io');
+const io = socketIo(server);
 
 app.get('/', (request, response) => {
   response.sendfile(__dirname + '/public/index.html')
@@ -22,7 +31,6 @@ app.get('/', (request, response) => {
 
 app.get('/poll', (request, response) => {
   response.sendfile(__dirname + '/public/poll.html')
-
 })
 
 app.get('/api/polls', (request, response) => {
@@ -30,13 +38,27 @@ app.get('/api/polls', (request, response) => {
 });
 
 app.post('/api/polls', (request, response) => {
+  app.locals.polls = []
   app.locals.polls.push(request.body)
   response.send(app.locals.polls)
   console.log(app.locals.polls);
 });
 
-app.listen(app.get('port'), () => {
-  console.log(`${app.locals.title} is running on ${app.get('port')}.`);
+io.on('connection', (socket) => {
+  console.log('A user has connected.', io.engine.clientsCount);
+
+  io.sockets.emit('usersConnected', io.engine.clientsCount);
+
+  socket.emit('statusMessage', 'You have connected.')
+
+  socket.on('disconnect', () => {
+    console.log('A user has disconnected.', io.engine.clientsCount);
+    io.sockets.emit('usersConnected', io.engine.clientsCount);
+  });
 });
+
+// app.listen(app.get('port'), () => {
+//   console.log(`${app.locals.title} is running on ${app.get('port')}.`);
+// });
 
 module.exports = app;
