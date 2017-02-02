@@ -11,6 +11,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('port', process.env.PORT || 3000);
 app.locals.title = 'Real Time';
 
+app.locals.polls = [];
+
+// { question: ''.
+// answers: ['','','']}
+
 app.use(express.static(path.join(__dirname, '/public')))
 
 app.get('/', (request, response) => {
@@ -20,6 +25,12 @@ app.get('/', (request, response) => {
 app.get('/poll', (request, response) => {
   response.sendfile(__dirname + '/public/poll.html')
 })
+
+app.post('/polls', (request, response) => {
+  app.locals.polls.push(request.body)
+  response.send(app.locals.polls)
+  console.log(app.locals.polls);
+});
 
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on ${app.get('port')}.`);
