@@ -16,6 +16,6 @@ $('.question-form').on('submit', function(e) {
       </div>
       <a href="/poll.html"> Link </a>
       `
-    )
+    );
   });
 });

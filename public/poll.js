@@ -11,8 +11,8 @@ $(document).ready(function() {
     url: '/api/polls'
   }).then(function(response) {
     let poll = response[0]
-    renderPoll(poll)
-    renderResults(poll)
+    renderPoll(poll);
+    renderResults(poll);
   });
 });
 
@@ -20,19 +20,28 @@ function renderPoll(poll) {
   $('#poll-question').append(
     `<h3>${poll.question}</h3>`
   );
+  console.log(poll);
   poll.answers.forEach(function(answer) {
     $('#choices').append(
       `<button class=choice-buttons type=radio>${answer}</button>`
     );
   });
+  // assignChoiceObject(poll);
 }
+
+// function assignChoiceObject(poll) {
+//     poll.answers.forEach(function(answer){
+//       let vote = new Object(answer);
+//       return Object.assign(votesCounter, votesCounter[answer], answer = 0);
+//   });
+// }
 
 function renderResults(poll) {
   poll.answers.forEach(function(answer) {
     $('#results').append(
       `<p><span class=results>${answer} : </span><span class=count>0</span></p>`
-    )
-  })
+    );
+  });
 }
 
 $('#choices').on('click', '.choice-buttons', function() {
@@ -48,7 +57,7 @@ socket.on('results', (message) => {
 });
 
 socket.on('votes', (votes) => {
-  $('.votes-container').append()
+  $('.votes-container').append();
   let voteCounts = (Object.values(Object.assign(votesCounter, votes)))
   .reduce(function(allVotes, vote){
     if (vote in allVotes) {
@@ -60,6 +69,7 @@ socket.on('votes', (votes) => {
   }, {});
   renderVotes(voteCounts);
 });
+
 
 function renderVotes(votes) {
   $('#results').empty();

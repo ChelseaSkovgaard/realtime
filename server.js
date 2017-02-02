@@ -18,13 +18,13 @@ const votes = {}
 const voteCount = {
 }
 
-app.use(express.static(path.join(__dirname, '/public')))
+app.use(express.static(path.join(__dirname, '/public')));
 
 const port = process.env.PORT || 3000;
 const server = http.createServer(app)
   .listen(port, () => {
     console.log(`Listening on port ${port}.`)
-  })
+  });
 
 const socketIo = require('socket.io');
 const io = socketIo(server);
@@ -52,7 +52,7 @@ io.on('connection', (socket) => {
 
   io.sockets.emit('usersConnected', io.engine.clientsCount);
 
-  socket.emit('statusMessage', 'You have connected.')
+  socket.emit('statusMessage', 'You have connected.');
 
   socket.on('message', (channel, message) => {
     if(channel === 'voteCast') {
@@ -68,8 +68,6 @@ io.on('connection', (socket) => {
   });
 });
 
-// app.listen(app.get('port'), () => {
-//   console.log(`${app.locals.title} is running on ${app.get('port')}.`);
-// });
+
 
 module.exports = app;

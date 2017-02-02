@@ -14,7 +14,7 @@ $(document).ready(function() {
   $('.btn-logout').click(function(e) {
     e.preventDefault();
     logout();
-  })
+  });
 
   lock.on("authenticated", function(authResult) {
     lock.getProfile(authResult.idToken, function(error, profile) {
@@ -23,6 +23,7 @@ $(document).ready(function() {
         return;
       }
       localStorage.setItem('id_token', authResult.idToken);
+
       // Display user information
       show_profile_info(profile);
     });
@@ -47,6 +48,7 @@ $(document).ready(function() {
      $('.btn-login').hide();
      $('.avatar').attr('src', profile.picture).show();
      $('.btn-logout').show();
+     localStorage.setItem('photo', profile.picture);
   };
 
   var logout = function() {
