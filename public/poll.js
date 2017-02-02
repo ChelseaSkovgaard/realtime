@@ -40,6 +40,6 @@ socket.on('results', (message) => {
   results.innerText = message;
 });
 
-sockets.on('votes', (votes) => {
-  votes.innerText = votes
+socket.on('votes', (votes) => {
+  console.log(votes)
 })

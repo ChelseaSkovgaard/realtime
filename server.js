@@ -57,10 +57,9 @@ io.on('connection', (socket) => {
   socket.on('message', (channel, message) => {
     if(channel === 'voteCast') {
       votes[socket.id] = message;
-      io.sockets.emit(votes)
+      socket.emit('votes', votes)
     }
   });
-
 
   socket.on('disconnect', () => {
     console.log('A user has disconnected.', io.engine.clientsCount);
