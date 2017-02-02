@@ -13,7 +13,10 @@ app.set('port', process.env.PORT || 3000);
 app.locals.title = 'Real Time';
 
 app.locals.polls = [];
+
 const votes = {}
+const voteCount = {
+}
 
 app.use(express.static(path.join(__dirname, '/public')))
 
@@ -42,7 +45,6 @@ app.post('/api/polls', (request, response) => {
   app.locals.polls = []
   app.locals.polls.push(request.body)
   response.send(app.locals.polls)
-  console.log(app.locals.polls);
 });
 
 io.on('connection', (socket) => {
@@ -55,14 +57,14 @@ io.on('connection', (socket) => {
   socket.on('message', (channel, message) => {
     if(channel === 'voteCast') {
       votes[socket.id] = message;
-      console.log(votes)
+      io.sockets.emit(votes)
     }
   });
+
 
   socket.on('disconnect', () => {
     console.log('A user has disconnected.', io.engine.clientsCount);
     delete votes[socket.id];
-    console.log(votes)
     io.sockets.emit('usersConnected', io.engine.clientsCount);
   });
 });

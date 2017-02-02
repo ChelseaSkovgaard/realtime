@@ -2,6 +2,7 @@ const socket = io();
 
 const connectionCount = document.getElementById('connection-count');
 const results = document.getElementById('results');
+const voteDiv = document.querySelector('.votes')
 
 $(document).ready(function() {
   $.ajax({
@@ -38,3 +39,7 @@ socket.on('usersConnected', (count) => {
 socket.on('results', (message) => {
   results.innerText = message;
 });
+
+sockets.on('votes', (votes) => {
+  votes.innerText = votes
+})
