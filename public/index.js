@@ -4,7 +4,7 @@ $('.question-form').on('submit', function(e) {
   var answers = Array.from($('.answer-inputs')).map((m) => m.value)
   $.ajax({
     type: 'POST',
-    url: '/polls',
+    url: '/api/polls',
     data: {
       question: question,
       answers: answers

@@ -13,8 +13,6 @@ app.locals.title = 'Real Time';
 
 app.locals.polls = [];
 
-// { question: ''.
-// answers: ['','','']}
 
 app.use(express.static(path.join(__dirname, '/public')))
 
@@ -24,9 +22,15 @@ app.get('/', (request, response) => {
 
 app.get('/poll', (request, response) => {
   response.sendfile(__dirname + '/public/poll.html')
+
 })
 
-app.post('/polls', (request, response) => {
+app.get('/api/polls', (request, response) => {
+  response.send(app.locals)
+  console.log(app.locals)
+});
+
+app.post('/api/polls', (request, response) => {
   app.locals.polls.push(request.body)
   response.send(app.locals.polls)
   console.log(app.locals.polls);

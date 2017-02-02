@@ -11,7 +11,7 @@
     <script src="//cdn.auth0.com/js/lock/10.3.0/lock.min.js"></script>
 
     <script src="auth0-variables.js"></script>
-    <script src="poll.js"></script>
+    <script src="oauth.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
@@ -24,11 +24,11 @@
       <button type="submit" class="btn-logout" style="display:none;">Sign Out</button>
     </div>
 
-    <div id="poll" style="display:none;">
+    <div id="poll-container" style="display:none;">
       <p id="poll-question"></p>
       <div id="choices">
       </div>
     </div>
-
+    <script src="poll.js"></script>
   </body>
 </html>
