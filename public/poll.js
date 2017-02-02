@@ -23,14 +23,14 @@ function renderPoll(poll) {
   poll.answers.forEach(function(answer) {
     $('#choices').append(
       `<button class=choice-buttons type=radio>${answer}</button>`
-    )
-  })
-};
+    );
+  });
+}
 
 function renderResults(poll) {
   poll.answers.forEach(function(answer) {
     $('#results').append(
-      `<span class=results>${answer} : </span><span class=count>0</span>`
+      `<p><span class=results>${answer} : </span><span class=count>0</span></p>`
     )
   })
 }
@@ -38,9 +38,7 @@ function renderResults(poll) {
 
 $('#choices').on('click', '.choice-buttons', function() {
   socket.send('voteCast', this.innerText);
-})
-
-
+});
 
 socket.on('usersConnected', (count) => {
   connectionCount.innerText = 'Connected Users: ' + count;
@@ -51,7 +49,15 @@ socket.on('results', (message) => {
 });
 
 socket.on('votes', (votes) => {
-  console.log(votes)
   $('.votes-container').append()
-  console.log('votes', Object.assign(votesCounter, votes))
-})
+  let voteCounts = (Object.values(Object.assign(votesCounter, votes)))
+  .reduce(function(allVotes, vote){
+    if (vote in allVotes) {
+      allVotes[vote]++;
+    } else {
+      allVotes[vote] = 1;
+    }
+    return allVotes;
+  }, {});
+console.log(voteCounts);
+});
