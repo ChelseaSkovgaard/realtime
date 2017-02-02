@@ -3,18 +3,19 @@ $(document).ready(function() {
     type: 'GET',
     url: '/api/polls'
   }).then(function(response) {
-    let poll = response.polls[0]
+    console.log(response[0])
+    let poll = response[0]
+    renderPoll(poll)
   });
-}
+});
 
-renderPoll(poll) {
-
-  $('.poll-container').append(
-    `
-    <div>
-      <h3>${poll.question}</h3>
-      
-    </div>
-    `
+function renderPoll(poll) {
+  $('#poll-question').append(
+    `<h3>${poll.question}</h3>`
   );
+  poll.answers.forEach(function(answer) {
+    $('#choices').append(
+      `<button type=radio>${answer}</button>`
+    )
+  })
 }

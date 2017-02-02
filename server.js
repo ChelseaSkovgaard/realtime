@@ -26,8 +26,7 @@ app.get('/poll', (request, response) => {
 })
 
 app.get('/api/polls', (request, response) => {
-  response.send(app.locals)
-  console.log(app.locals)
+  response.send(app.locals.polls)
 });
 
 app.post('/api/polls', (request, response) => {
