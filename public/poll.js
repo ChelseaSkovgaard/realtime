@@ -3,6 +3,7 @@ const socket = io();
 const connectionCount = document.getElementById('connection-count');
 const results = document.getElementById('results');
 const voteDiv = document.querySelector('.votes')
+const votesCounter = {}
 
 $(document).ready(function() {
   $.ajax({
@@ -11,6 +12,7 @@ $(document).ready(function() {
   }).then(function(response) {
     let poll = response[0]
     renderPoll(poll)
+    renderResults(poll)
   });
 });
 
@@ -24,6 +26,14 @@ function renderPoll(poll) {
     )
   })
 };
+
+function renderResults(poll) {
+  poll.answers.forEach(function(answer) {
+    $('#results').append(
+      `<span class=results>${answer} : </span><span class=count>0</span>`
+    )
+  })
+}
 
 
 $('#choices').on('click', '.choice-buttons', function() {
@@ -42,4 +52,6 @@ socket.on('results', (message) => {
 
 socket.on('votes', (votes) => {
   console.log(votes)
+  $('.votes-container').append()
+  console.log('votes', Object.assign(votesCounter, votes))
 })
