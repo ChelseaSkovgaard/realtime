@@ -8,7 +8,6 @@ $(document).ready(function() {
     type: 'GET',
     url: '/api/polls'
   }).then(function(response) {
-    console.log(response[0])
     let poll = response[0]
     renderPoll(poll)
   });
