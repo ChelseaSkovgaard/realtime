@@ -1,7 +1,7 @@
 const socket = io();
 
 const connectionCount = document.getElementById('connection-count');
-const results = document.getElementById('results')
+const results = document.getElementById('results');
 
 $(document).ready(function() {
   $.ajax({
@@ -20,10 +20,17 @@ function renderPoll(poll) {
   );
   poll.answers.forEach(function(answer) {
     $('#choices').append(
-      `<button type=radio>${answer}</button>`
+      `<button class=choice-buttons type=radio>${answer}</button>`
     )
   })
 };
+
+
+$('#choices').on('click', '.choice-buttons', function() {
+  socket.send('voteCast', this.innerText);
+})
+
+
 
 socket.on('usersConnected', (count) => {
   connectionCount.innerText = 'Connected Users: ' + count;
