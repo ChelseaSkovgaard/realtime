@@ -1,3 +1,4 @@
+'use strict'
 const http = require('http')
 const express = require('express');
 const app = express();
@@ -12,9 +13,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('port', process.env.PORT || 3000);
 app.locals.title = 'Real Time';
 
-app.locals.votes = {};
+app.locals.polls = [];
+app.locals.answers = [[], [], [], []];
+app.locals.votes = {}
 
-// const votes = {}
+const votes = {}
 const voteCount = {
 }
 
@@ -42,14 +45,9 @@ app.get('/api/polls', (request, response) => {
 });
 
 app.post('/api/polls', (request, response) => {
-  console.log( request.body.answers.reduce(function(acc, i){
-    return acc[i] = []
-  }, {}))
-  
-  app.locals.votes = request.body.answers.reduce(function(acc, i){
-    return acc[i] = []
-  }, {})
-  response.send(app.locals.votes)
+  app.locals.polls = []
+  app.locals.polls.push(request.body);
+  response.send(app.locals.polls);
 });
 
 io.on('connection', (socket) => {
@@ -61,8 +59,9 @@ io.on('connection', (socket) => {
 
   socket.on('message', (channel, message) => {
     if(channel === 'voteCast') {
-      votes[socket.id] = message;
-      io.sockets.emit('votes', votes);
+      app.locals.answers[message.id].push(message.photoUrl)
+      let votes = app.locals.answers[message.id]
+      io.sockets.emit('votes', app.locals.answers);
     }
   });
 

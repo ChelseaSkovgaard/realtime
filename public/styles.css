@@ -41,3 +41,8 @@ label {
   margin-left: 100px;
   margin-top: 5px;
 }
+
+img {
+  height: 20px;
+  width: 20px;
+}
