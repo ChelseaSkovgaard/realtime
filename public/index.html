@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <link href="https://fonts.googleapis.com/css?family=Codystar|Droid+Serif" rel="stylesheet">
+    <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="styles.css" />
     <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
     <title>RealTalk</title>
@@ -10,36 +11,47 @@
   <body>
     <h1>Real Talk</h1>
     <section class="form-container">
-        <p> Create Your Poll </p>
+        <h3> CREATE YOUR POLL</h3>
         <form class='question-form'>
-          <label >
-            Question
-            <input class="question-inputs" id="question-input" type="text" />
-          </label>
-        <label>
-          Answer A:
-          <input class="answer-inputs" id="answer-input-1" type="text" />
-        </label>
+          <article class="input-field">
+            <label>
+              Question
+              <input class="question-inputs" id="question-input" type="text" />
+            </label>
+          </article>
 
-        <label>
-          Answer B:
-          <input class="answer-inputs" id="answer-input-2" type="text" />
-        </label>
+          <article class="input-field">
+            <label>
+              Answer A:
+              <input class="answer-inputs" id="answer-input-1" type="text" />
+            </label>
+          </article>
 
-        <label>
-          Answer C:
-          <input class="answer-inputs" id="answer-input-3" type="text" />
-        </label>
+          <article class="input-field">
+            <label>
+              Answer B:
+              <input class="answer-inputs" id="answer-input-2" type="text" />
+            </label>
+          </article>
 
-        <label>
-          Answer D:
-          <input class="answer-inputs" id="answer-input-4" type="text" />
-        </label>
+          <article class="input-field">
+            <label>
+              Answer C:
+              <input class="answer-inputs" id="answer-input-3" type="text" />
+            </label>
+          </article>
+
+          <article class="input-field">
+            <label>
+              Answer D:
+              <input class="answer-inputs" id="answer-input-4" type="text" />
+            </label>
+          </article>
 
         <input class="submit-btn" type="submit" />
       </form>
     </section>
-    <h3> Link for Poll </h3>
+    <h3 id="poll-link-header">LINK FOR POLL</h3>
     <section class="question-container">
     </section>
 

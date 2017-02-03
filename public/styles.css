@@ -1,24 +1,26 @@
 body {
   background-color: 'black';
   color: 'papayawhip';
+  font-family: serif;
 }
 
 h1 {
   font-family: 'Codystar', cursive;
+  font-size: 40px;
+  margin: 30px;
+  font-weight: bold;
+}
+
+h3 {
+  font-family: 'Droid Serif', serif;
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: #8e44ad;
 }
 
 .form-container {
   height: auto;
-  width: 75vm;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.signin-container {
-  align-items: center;
-  justify-content: center;
-  
+  margin: 0 30px 20px;
 }
 
 .question-container {
@@ -27,27 +29,61 @@ h1 {
 
 label {
   font-family: 'Droid Serif', serif;
-  margin-left: 100px;
-  margin-top: 20px;
-  margin-bottom: 5px;
+  padding-bottom: 20px;
+}
+
+.input-field {
+  margin: 10px;
 }
 
 .question-inputs, .answer-inputs {
-  width: 10vh;
+  width: 150px;
   display: block;
-  margin-left: 100px;
-  margin-top: 5px;
   border-radius: 5px;
-  box-shadow: 5px 5px 2px #888888;
+  box-shadow: 2px 2px 2px #888888;
+  margin-top: 5px;
 }
 
 .submit-btn {
   border-radius: 5px;
   margin-left: 100px;
   margin-top: 5px;
+  background-color: #8e44ad;
+  color: white;
+  font-size: 16px;
+  border: none;
+}
+
+.btn-logout {
+  border-radius: 5px;
+  border: none;
+  background-color: #8e44ad;
+  color: white;
+  font-size: 12px;
 }
 
 img {
   height: 20px;
   width: 20px;
+}
+
+#poll-link-header {
+  margin: 0 30px 10px;
+}
+
+.question, a {
+  font-size: 16px;
+  margin: 5px;
+}
+
+.avatar {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+}
+
+.signin-container, #poll-container, .votes-container {
+  margin: 20px;
+  font-family: 'Droid Serif', serif;
+  font-size: 18px;
 }
