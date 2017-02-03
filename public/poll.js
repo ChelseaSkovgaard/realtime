@@ -13,7 +13,7 @@ $(document).ready(function() {
     console.log(response);
     let poll = response[0]
     renderPoll(poll);
-    renderResults(poll);
+    // renderResults(poll);
   });
 });
 
@@ -26,7 +26,7 @@ function renderPoll(poll) {
       `<button class=choice-buttons type=radio id=${i}>${poll.answers[i]}</button>`
     )
     $('.votes-container').append(
-      `<p><span class=results>${poll.answers[i]} : </span><span id=${i} class=count></span></p>`
+      `<p><span class=results>${poll.answers[i]} : </span><span id=vote${i} class=count></span></p>`
     )
   }
   }
@@ -39,20 +39,20 @@ function renderPoll(poll) {
 //   });
 // }
 
-function renderResults(poll) {
-  poll.answers.forEach(function(answer) {
-    $('#results').append(
-      `<p><span class=results>${answer} : </span><span class=count>0</span></p>`
-    );
-  });
-}
+// function renderResults(poll) {
+//   poll.answers.forEach(function(answer) {
+//     $('#results').append(
+//       `<p><span class=results>${answer} : </span><span class=count>0</span></p>`
+//     );
+//   });
+// }
 
 $('#choices').on('click', '.choice-buttons', function() {
   let id =  $(this).attr('id')
   let vote = {
     photoUrl: localStorage.getItem('photo'),
     id: id
-  }
+  };
   socket.send('voteCast', vote );
 });
 
@@ -65,11 +65,12 @@ socket.on('usersConnected', (count) => {
 // });
 
 socket.on('votes', (votes) => {
-  for (var i = 0; i < votes.length - 1; i++) {
-    return votes[i].forEach(function(url, index) {
-      $(`.count`).append(`<img src=${url} ></img>`)
-    })
-  }
+  votes.forEach(function(userArray, i){
+    $(`#vote${i}`).empty();
+  userArray.forEach(function(url) {
+      $(`#vote${i}`).append(`<img src=${url} ></img>`)
+    });
+  });
 });
 
   // $('.votes-container').append();
@@ -88,15 +89,15 @@ socket.on('votes', (votes) => {
 // });
 
 
-function renderVotes(votes) {
-  $('#results').empty();
-  let answers = Object.keys(votes)
-
-  answers.forEach(function(count) {
-    console.log(answers);
-    $('#results').append(
-      `<p>${count} : <span class=count>${votes[count]}</span></p>`
-    );
-  });
-  console.log(answers);
-}
+// function renderVotes(votes) {
+//   $('#results').empty();
+//   let answers = Object.keys(votes)
+//
+//   answers.forEach(function(count) {
+//     console.log(answers);
+//     $('#results').append(
+//       `<p>${count} : <span class=count>${votes[count]}</span></p>`
+//     );
+//   });
+//   console.log(answers);
+// }
