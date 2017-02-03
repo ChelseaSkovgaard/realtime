@@ -72,13 +72,4 @@ io.on('connection', (socket) => {
   });
 });
 
-// for(let i = 0; i < app.locals.answers.length; i++) {
-//   for(let j = 0; j < app.locals.answers[i].length; j++) {
-//     if (app.locals.answers[i][j] === message.photoUrl) {
-//       let index = app.locals.answers[i][j].indexOf(message.photoUrl)
-//         delete app.locals.answers[i][ index ]
-//     }
-//   }
-// }
-
 module.exports = app;
