@@ -50,14 +50,16 @@ app.post('/api/polls', (request, response) => {
 });
 
 io.on('connection', (socket) => {
-  console.log('A user has connected.', io.engine.clientsCount);
-
+  io.sockets.emit('votes', app.locals.answers)
   io.sockets.emit('usersConnected', io.engine.clientsCount);
-
-  socket.emit('statusMessage', 'You have connected.');
 
   socket.on('message', (channel, message) => {
     if(channel === 'voteCast') {
+      app.locals.answers = app.locals.answers.map((answer) => {
+        return answer.filter((vote) => {
+          return vote !== message.photoUrl
+        })
+      })
       app.locals.answers[message.id].push(message.photoUrl)
       let votes = app.locals.answers[message.id]
       io.sockets.emit('votes', app.locals.answers);
@@ -66,11 +68,17 @@ io.on('connection', (socket) => {
 
   socket.on('disconnect', () => {
     console.log('A user has disconnected.', io.engine.clientsCount);
-    delete votes[socket.id];
     io.sockets.emit('usersConnected', io.engine.clientsCount);
   });
 });
 
-
+// for(let i = 0; i < app.locals.answers.length; i++) {
+//   for(let j = 0; j < app.locals.answers[i].length; j++) {
+//     if (app.locals.answers[i][j] === message.photoUrl) {
+//       let index = app.locals.answers[i][j].indexOf(message.photoUrl)
+//         delete app.locals.answers[i][ index ]
+//     }
+//   }
+// }
 
 module.exports = app;
