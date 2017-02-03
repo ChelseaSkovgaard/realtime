@@ -1,3 +1,4 @@
+'use strict'
 const http = require('http')
 const express = require('express');
 const app = express();
@@ -13,18 +14,19 @@ app.set('port', process.env.PORT || 3000);
 app.locals.title = 'Real Time';
 
 app.locals.polls = [];
+app.locals.answers = [[], [], [], []];
+app.locals.votes = {}
 
 const votes = {}
-const voteCount = {
-}
+const voteCount = {}
 
-app.use(express.static(path.join(__dirname, '/public')))
+app.use(express.static(path.join(__dirname, '/public')));
 
 const port = process.env.PORT || 3000;
 const server = http.createServer(app)
   .listen(port, () => {
     console.log(`Listening on port ${port}.`)
-  })
+  });
 
 const socketIo = require('socket.io');
 const io = socketIo(server);
@@ -43,8 +45,8 @@ app.get('/api/polls', (request, response) => {
 
 app.post('/api/polls', (request, response) => {
   app.locals.polls = []
-  app.locals.polls.push(request.body)
-  response.send(app.locals.polls)
+  app.locals.polls.push(request.body);
+  response.send(app.locals.polls);
 });
 
 io.on('connection', (socket) => {
@@ -52,12 +54,13 @@ io.on('connection', (socket) => {
 
   io.sockets.emit('usersConnected', io.engine.clientsCount);
 
-  socket.emit('statusMessage', 'You have connected.')
+  socket.emit('statusMessage', 'You have connected.');
 
   socket.on('message', (channel, message) => {
     if(channel === 'voteCast') {
-      votes[socket.id] = message;
-      io.sockets.emit('votes', votes);
+      app.locals.answers[message.id].push(message.photoUrl)
+      let votes = app.locals.answers[message.id]
+      io.sockets.emit('votes', app.locals.answers);
     }
   });
 
@@ -68,8 +71,6 @@ io.on('connection', (socket) => {
   });
 });
 
-// app.listen(app.get('port'), () => {
-//   console.log(`${app.locals.title} is running on ${app.get('port')}.`);
-// });
+
 
 module.exports = app;

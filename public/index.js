@@ -1,21 +1,29 @@
 $('.question-form').on('submit', function(e) {
   (e).preventDefault();
-  var question = $('#question-input').val()
-  var answers = Array.from($('.answer-inputs')).map((m) => m.value)
+
+  var question = $('#question-input').val();
+
+  var answers = Array.from($('.answer-inputs')).map((m) => m.value);
+
   $.ajax({
     type: 'POST',
     url: '/api/polls',
     data: {
       question: question,
-      answers: answers
+      answers: answers,
+      pollAnswers: [[], [], [], []]
     }
-  }).then(function(response) {
+  })
+  .then(function(response) {
     $('.question-container').append(
-      `<div class="question">
+      `
+      <div class="question">
         ${question}
       </div>
-      <a href="/poll.html"> Link </a>
+      <a href="/poll.html">
+        Link
+      </a>
       `
-    )
+    );
   });
 });
