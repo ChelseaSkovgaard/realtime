@@ -60,6 +60,7 @@ label {
   background-color: #8e44ad;
   color: white;
   font-size: 12px;
+  margin-top: 10px;
 }
 
 img {
@@ -86,4 +87,19 @@ img {
   margin: 20px;
   font-family: 'Droid Serif', serif;
   font-size: 18px;
+}
+
+#results-header {
+  margin: 30px 20px 20px;
+}
+
+#connection-count {
+  margin: 20px;
+}
+
+.choice-buttons {
+  margin-right: 10px;
+  background-color: #8e44ad;
+  color: white;
+  border: none;
 }
