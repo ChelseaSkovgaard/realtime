@@ -13,6 +13,7 @@ app.set('port', process.env.PORT || 3000);
 app.locals.title = 'Real Time';
 
 app.locals.polls = [];
+app.locals.answers = [[], [], [], []];
 
 const votes = {}
 const voteCount = {
@@ -43,8 +44,8 @@ app.get('/api/polls', (request, response) => {
 
 app.post('/api/polls', (request, response) => {
   app.locals.polls = []
-  app.locals.polls.push(request.body)
-  response.send(app.locals.polls)
+  app.locals.polls.push(request.body);
+  response.send(app.locals.polls);
 });
 
 io.on('connection', (socket) => {
@@ -56,7 +57,8 @@ io.on('connection', (socket) => {
 
   socket.on('message', (channel, message) => {
     if(channel === 'voteCast') {
-      votes[socket.id] = message;
+      app.locals.answers[message.id].push(message.photoUrl)
+      votes = app.locals.answers[message.id]
       io.sockets.emit('votes', votes);
     }
   });

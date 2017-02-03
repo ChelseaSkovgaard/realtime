@@ -10,6 +10,7 @@ $(document).ready(function() {
     type: 'GET',
     url: '/api/polls'
   }).then(function(response) {
+    console.log(response)
     let poll = response[0]
     renderPoll(poll);
     renderResults(poll);
@@ -20,14 +21,16 @@ function renderPoll(poll) {
   $('#poll-question').append(
     `<h3>${poll.question}</h3>`
   );
-  console.log(poll);
-  poll.answers.forEach(function(answer) {
+  for (var i = 0; i< 4; i++) {
     $('#choices').append(
-      `<button class=choice-buttons type=radio>${answer}</button>`
-    );
-  });
-  // assignChoiceObject(poll);
-}
+      `<button class=choice-buttons type=radio id=${i}>${poll.answers[i]}</button>`
+    )
+    $('.votes-container').append(
+      `<p><span class=results>${poll.answers[i]} : </span><span id=${i}class=count></span></p>`
+    )
+  }
+  }
+
 
 // function assignChoiceObject(poll) {
 //     poll.answers.forEach(function(answer){
@@ -45,30 +48,43 @@ function renderResults(poll) {
 }
 
 $('#choices').on('click', '.choice-buttons', function() {
-  socket.send('voteCast', this.innerText);
+  let id =  $(this).attr('id')
+  let vote = {
+    photoUrl: localStorage.getItem('photo'),
+    id: id
+  }
+  socket.send('voteCast', vote );
 });
 
 socket.on('usersConnected', (count) => {
   connectionCount.innerText = 'Connected Users: ' + count;
 });
 
-socket.on('results', (message) => {
-  results.innerText = message;
-});
+// socket.on('results', (message) => {
+//   results.innerText = message;
+// });
 
-socket.on('votes', (votes) => {
-  $('.votes-container').append();
-  let voteCounts = (Object.values(Object.assign(votesCounter, votes)))
-  .reduce(function(allVotes, vote){
-    if (vote in allVotes) {
-      allVotes[vote]++;
-    } else {
-      allVotes[vote] = 1;
-    }
-    return allVotes;
-  }, {});
-  renderVotes(voteCounts);
-});
+// socket.on('votes', (votes) => {
+//
+//
+//
+//
+// };
+
+  // $('.votes-container').append();
+
+
+//   let voteCounts = (Object.values(Object.assign(votesCounter, votes)))
+//   .reduce(function(allVotes, vote){
+//     if (vote in allVotes) {
+//       allVotes[vote]++;
+//     } else {
+//       allVotes[vote] = 1;
+//     }
+//     return allVotes;
+//   }, {});
+//   renderVotes(voteCounts);
+// });
 
 
 function renderVotes(votes) {

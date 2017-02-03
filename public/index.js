@@ -7,7 +7,8 @@ $('.question-form').on('submit', function(e) {
     url: '/api/polls',
     data: {
       question: question,
-      answers: answers
+      answers: answers,
+      pollAnswers: [[], [], [], []]
     }
   }).then(function(response) {
     $('.question-container').append(
