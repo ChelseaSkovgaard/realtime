@@ -12,9 +12,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('port', process.env.PORT || 3000);
 app.locals.title = 'Real Time';
 
-app.locals.polls = [];
+app.locals.votes = {};
 
-const votes = {}
+// const votes = {}
 const voteCount = {
 }
 
@@ -42,9 +42,14 @@ app.get('/api/polls', (request, response) => {
 });
 
 app.post('/api/polls', (request, response) => {
-  app.locals.polls = []
-  app.locals.polls.push(request.body)
-  response.send(app.locals.polls)
+  console.log( request.body.answers.reduce(function(acc, i){
+    return acc[i] = []
+  }, {}))
+  
+  app.locals.votes = request.body.answers.reduce(function(acc, i){
+    return acc[i] = []
+  }, {})
+  response.send(app.locals.votes)
 });
 
 io.on('connection', (socket) => {

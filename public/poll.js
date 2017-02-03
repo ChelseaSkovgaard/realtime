@@ -10,6 +10,7 @@ $(document).ready(function() {
     type: 'GET',
     url: '/api/polls'
   }).then(function(response) {
+    console.log(response);
     let poll = response[0]
     renderPoll(poll);
     renderResults(poll);
@@ -45,7 +46,9 @@ function renderResults(poll) {
 }
 
 $('#choices').on('click', '.choice-buttons', function() {
-  socket.send('voteCast', this.innerText);
+  let voteInfo = {photoUrl: localStorage.getItem('photo'),
+voteChoice: this.innerText}
+  socket.send('voteCast', voteInfo);
 });
 
 socket.on('usersConnected', (count) => {
