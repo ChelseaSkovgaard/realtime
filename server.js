@@ -50,11 +50,8 @@ app.post('/api/polls', (request, response) => {
 });
 
 io.on('connection', (socket) => {
-  console.log('A user has connected.', io.engine.clientsCount);
-
+  socket.emit('votes', app.locals.answers)
   io.sockets.emit('usersConnected', io.engine.clientsCount);
-
-  socket.emit('statusMessage', 'You have connected.');
 
   socket.on('message', (channel, message) => {
     if(channel === 'voteCast') {
