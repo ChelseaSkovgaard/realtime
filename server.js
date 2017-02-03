@@ -18,8 +18,7 @@ app.locals.answers = [[], [], [], []];
 app.locals.votes = {}
 
 const votes = {}
-const voteCount = {
-}
+const voteCount = {}
 
 app.use(express.static(path.join(__dirname, '/public')));
 

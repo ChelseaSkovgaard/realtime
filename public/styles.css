@@ -8,23 +8,28 @@ h1 {
 }
 
 .form-container {
-  height: 75vh;
+  height: auto;
   width: 75vm;
   align-items: center;
   justify-content: center;
+  padding: 20px;
 }
+
 .signin-container {
   align-items: center;
   justify-content: center;
-  padding-left: 250px;
-  padding-top: 250px;
+  
 }
+
+.question-container {
+  margin: 25px;
+}
+
 label {
   font-family: 'Droid Serif', serif;
   margin-left: 100px;
   margin-top: 20px;
   margin-bottom: 5px;
-
 }
 
 .question-inputs, .answer-inputs {
