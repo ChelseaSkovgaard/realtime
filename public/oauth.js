@@ -45,6 +45,9 @@ $(document).ready(function() {
      $('.btn-login').hide();
      $('.avatar').attr('src', profile.picture).show();
      $('.btn-logout').show();
+     $('#poll-container').show();
+     $('#results-header').show();
+     $('.votes-container').show();
      localStorage.setItem('photo', profile.picture);
   };
 
