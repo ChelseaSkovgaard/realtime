@@ -26,7 +26,9 @@ function renderPoll(poll) {
       `<button class=choice-buttons type=radio id=${i}>${poll.answers[i]}</button>`
     )
     $('.votes-container').append(
-      `<p><span class=results>${poll.answers[i]} : </span><span id=vote${i} class=count></span></p>`
+      `<p><span class=results>${poll.answers[i]} : </span><span id=vote${i} class=count></span>
+      <span id=count${i}>0</span>
+      </p>`
     )
   }
   }
@@ -65,10 +67,14 @@ socket.on('usersConnected', (count) => {
 // });
 
 socket.on('votes', (votes) => {
-  votes.forEach(function(userArray, i){
+  console.log(votes[0].length)
+  votes.forEach(function(results, i){
     $(`#vote${i}`).empty();
-  userArray.forEach(function(url) {
-      $(`#vote${i}`).append(`<img src=${url} ></img>`)
+    $(`#count${i}`).empty();
+    $(`#count${i}`).append(`<span> ${votes[i].length} </span>`);
+  results.forEach(function(url) {
+      $(`#vote${i}`).append(`<img src=${url} ></img>`);
+
     });
   });
 });
