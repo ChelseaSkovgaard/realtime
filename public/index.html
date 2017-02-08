@@ -6,51 +6,59 @@
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="styles.css" />
     <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
-    <title>RealTalk</title>
+    <title>Ask Audience</title>
   </head>
   <body>
-    <h1>Real Talk</h1>
+    <h1>Ask Audience</h1>
     <section class="form-container">
-        <h3> CREATE YOUR POLL</h3>
+        <article id="instructions"> Easy polls/surveys. Simply enter your question and add answer options. After submitting, a link will appear, which you can then share. </article>
+
         <form class='question-form'>
-          <article class="input-field">
-            <label>
-              Question
-              <input class="question-inputs" id="question-input" type="text" />
-            </label>
-          </article>
 
-          <article class="input-field">
-            <label>
-              Answer A:
-              <input class="answer-inputs" id="answer-input-1" type="text" />
-            </label>
-          </article>
+          <section id="question">
+            <article class="input-field">
+              <label>
+                Enter Your Question
+                <input class="question-inputs" id="question-input" placeholder="Question" type="text" />
+              </label>
+            </article>
+          </section>
 
-          <article class="input-field">
-            <label>
-              Answer B:
-              <input class="answer-inputs" id="answer-input-2" type="text" />
-            </label>
-          </article>
+          <section id="answers">
+            <article class="input-field">
+              <label>
+                Answer A:
+                <input class="answer-inputs" id="answer-input-1" type="text" />
+              </label>
+            </article>
 
-          <article class="input-field">
-            <label>
-              Answer C:
-              <input class="answer-inputs" id="answer-input-3" type="text" />
-            </label>
-          </article>
+            <article class="input-field">
+              <label>
+                Answer B:
+                <input class="answer-inputs" id="answer-input-2" type="text" />
+              </label>
+            </article>
 
-          <article class="input-field">
-            <label>
-              Answer D:
-              <input class="answer-inputs" id="answer-input-4" type="text" />
-            </label>
-          </article>
+            <article class="input-field">
+              <label>
+                Answer C:
+                <input class="answer-inputs" id="answer-input-3" type="text" />
+              </label>
+            </article>
 
-        <input class="submit-btn" type="submit" />
+            <article class="input-field">
+              <label>
+                Answer D:
+                <input class="answer-inputs" id="answer-input-4" type="text" />
+              </label>
+            </article>
+          </section>
+          <article id="submit">
+            <input class="submit-btn" type="submit" />
+          </article>
       </form>
     </section>
+
     <h3 id="poll-link-header">LINK FOR POLL</h3>
     <section class="question-container">
     </section>

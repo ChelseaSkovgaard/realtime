@@ -1,12 +1,12 @@
 body {
-  background-color: 'black';
-  color: 'papayawhip';
-  font-family: serif;
+  background-color: #068D9D;
+  color: white;
+  font-family: sans-serif;
 }
 
 h1 {
   font-family: 'Codystar', cursive;
-  font-size: 40px;
+  font-size: 60px;
   margin: 30px;
   font-weight: bold;
 }
@@ -15,40 +15,71 @@ h3 {
   font-family: 'Droid Serif', serif;
   margin-bottom: 15px;
   font-weight: bold;
-  color: #8e44ad;
+  color: #BF1363;
 }
 
 .form-container {
   height: auto;
   margin: 0 30px 20px;
+
 }
 
+#instructions {
+  width: 600px;
+  line-height: 2;
+}
 .question-container {
   margin: 25px;
 }
 
+.question-form {
+  margin: 40px;
+}
+
+input {
+  border: none;
+  background-color: transparent;
+}
+
 label {
-  font-family: 'Droid Serif', serif;
+  font-family: sans-serif;
+  font-size: 18px;
   padding-bottom: 20px;
 }
 
 .input-field {
   margin: 10px;
+  border-bottom: #F39237 3px solid;
+}
+
+#question {
+  display: inline-block;
+  width: 300px;
+  vertical-align: top;
+}
+
+#answers {
+  display: inline-block;
+  width: 300px;
+  border-left: #F39237 3px solid;
+  padding-left: 10px;
 }
 
 .question-inputs, .answer-inputs {
   width: 150px;
   display: block;
-  border-radius: 5px;
-  box-shadow: 2px 2px 2px #888888;
   margin-top: 5px;
+  color: white;
+  height: 18px;
+  font-size: 16px;
+  padding: 5px;
+
 }
 
 .submit-btn {
   border-radius: 5px;
-  margin-left: 100px;
-  margin-top: 5px;
-  background-color: #8e44ad;
+  margin-left: 400px;
+  background-color: #BF1363;
   color: white;
   font-size: 16px;
   border: none;
@@ -57,7 +88,7 @@ label {
 .btn-logout {
   border-radius: 5px;
   border: none;
-  background-color: #8e44ad;
+  background-color: #BF1363;
   color: white;
   font-size: 12px;
   margin-top: 10px;
@@ -97,9 +128,13 @@ img {
   margin: 20px;
 }
 
+#submit {
+  display: block;
+}
+
 .choice-buttons {
   margin-right: 10px;
-  background-color: #8e44ad;
+  background-color: #BF1363;
   color: white;
   border: none;
 }
