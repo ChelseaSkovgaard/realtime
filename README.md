@@ -1,8 +1,8 @@
-#Ask Audience
+#Real Time
 
 ###Description
 
-Welcome to the codebase of our Ask Audience application. This application enables users to create a real time poll. 
+Welcome to the codebase of our Real Time application. This application enables users to create a real time poll. 
 Users can create a poll than share it. In order to answer the poll, people complete a github oauth.
 
 The application is built with CSS, JQuery, Node.JS, Express and Websockets. Testing was done using Mocha and Chai. 
