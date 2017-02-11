@@ -5,15 +5,18 @@ $('.question-form').on('submit', function(e) {
 
   var answers = Array.from($('.answer-inputs')).map((m) => m.value);
 
+  var id = Date.now();
+
   $.ajax({
     type: 'POST',
     url: '/api/polls',
     data: {
+      id: id,
       question: question,
-      answers: answers,
-      pollAnswers: [[], [], [], []]
+      answers: answers
     }
   })
+
   .then(function(response) {
     $('.question-container').append(
       `
